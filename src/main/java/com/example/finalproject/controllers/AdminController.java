@@ -1,8 +1,10 @@
 package com.example.finalproject.controllers;
 
 import com.example.finalproject.models.Image;
+import com.example.finalproject.models.Order;
 import com.example.finalproject.models.Product;
 import com.example.finalproject.repositories.CategoryRepository;
+import com.example.finalproject.repositories.OrderRepository;
 import com.example.finalproject.security.PersonDetails;
 import com.example.finalproject.services.ProductService;
 import com.example.finalproject.util.ProductValidator;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -34,14 +37,16 @@ public class AdminController {
 
     private final CategoryRepository categoryRepository;
 
-    @Autowired
-    public AdminController(ProductValidator productValidator, ProductService productService, CategoryRepository categoryRepository) {
+    private final OrderRepository orderRepository;
+
+    public AdminController(ProductValidator productValidator, ProductService productService, CategoryRepository categoryRepository, OrderRepository orderRepository) {
         this.productValidator = productValidator;
         this.productService = productService;
         this.categoryRepository = categoryRepository;
+        this.orderRepository = orderRepository;
     }
 
-    //    @PreAuthorize("hasRole('ROLE_ADMIN') and hasRole('')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN') and hasRole('')")
 //@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('')")
 
     // Метод по отображению главной страницы администратора с выводом товаров
@@ -210,7 +215,29 @@ public class AdminController {
         productService.updateProduct(id, product);
         return "redirect:/admin";
     }
+    @GetMapping("/test")
+    public String test(Model model){
+
+        List<Order> orderList = orderRepository.findAll();
+        model.addAttribute("orders", orderList);
 
 
+        return "admin/test";
+    }
 
+    @PostMapping("/test_order")
+    public String testResult (@RequestParam("test") String test, Model model){
+//        System.out.println(test);
+//        model.addAttribute("test1", test);
+//        System.out.println("Вызов:" + model.getAttribute("test1"));
+//        System.out.println(model.addAttribute("test1", orderRepository.findByLastFourSign("c925")));
+//        System.out.println(orderRepository.findByLastFourSign("c925"));
+//        System.out.println(model.addAttribute("test1", orderRepository.findByNumber(test)));
+//        System.out.println(model.addAttribute("test1", orderRepository.findByNumberContaining(test)));
+//        System.out.println(orderRepository.findAll());
+        List<Order> orderList = orderRepository.findByNumberContaining(test);
+        model.addAttribute("search_order", orderList);
+
+        return "admin/test";
+    }
 }

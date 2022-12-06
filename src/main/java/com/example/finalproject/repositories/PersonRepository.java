@@ -9,4 +9,5 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
     // Получаем запись из БД по логину
     Optional<Person> findByLogin(String login);
 
+
 }

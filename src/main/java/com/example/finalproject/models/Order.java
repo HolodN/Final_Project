@@ -12,6 +12,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column (name="number")
     private String number;
 
     private int count;
@@ -109,4 +110,5 @@ public class Order {
     public Order(){
 
     }
+
 }

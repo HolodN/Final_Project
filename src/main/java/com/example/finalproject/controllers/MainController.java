@@ -1,11 +1,15 @@
 package com.example.finalproject.controllers;
 
+import com.example.finalproject.models.Order;
+import com.example.finalproject.repositories.OrderRepository;
 import com.example.finalproject.repositories.ProductRepository;
 import com.example.finalproject.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/product")
@@ -14,10 +18,13 @@ public class MainController {
     private final ProductRepository productRepository;
     private final ProductService productService;
 
+    private final OrderRepository orderRepository;
+
     @Autowired
-    public MainController(ProductRepository productRepository, ProductService productService) {
+    public MainController(ProductRepository productRepository, ProductService productService, OrderRepository orderRepository) {
         this.productRepository = productRepository;
         this.productService = productService;
+        this.orderRepository = orderRepository;
     }
 
     // Данный метод предназначен для отображении товаров без прохождения аутентификации и авторизации
@@ -48,15 +55,17 @@ public class MainController {
                 if (price.equals("sorted_by_ascending_price")) {
                     // Если категория товара не пустая
                     if (!category.isEmpty()) {
-                        // Если категория равная мебели
-                        if (category.equals("furniture")) {
+                        // Если категория равная видеокарты
+                        if (category.equals("videocards")) {
                             model.addAttribute("search_product", productRepository.findByTitleAndCategoryOrderByPrice(search.toLowerCase(), Float.parseFloat(ot), Float.parseFloat(Do), 1));
-                            // Если категория равная бытовой техники
-                        } else if (category.equals("appliances")) {
+                            // Если категория равная процессорам
+                        } else if (category.equals("processors")) {
                             model.addAttribute("search_product", productRepository.findByTitleAndCategoryOrderByPrice(search.toLowerCase(), Float.parseFloat(ot), Float.parseFloat(Do), 2));
-                            // Если категория равная одежде
-                        } else if (category.equals("clothes")) {
+                            // Если категория равная материнским платам
+                        } else if (category.equals("motherboards")) {
                             model.addAttribute("search_product", productRepository.findByTitleAndCategoryOrderByPrice(search.toLowerCase(), Float.parseFloat(ot), Float.parseFloat(Do), 3));
+                        } else if (category.equals("memory")) {
+                            model.addAttribute("search_product", productRepository.findByTitleAndCategoryOrderByPrice(search.toLowerCase(), Float.parseFloat(ot), Float.parseFloat(Do), 4));
                         }
                         // Если категория не выбрана
                     } else {
@@ -68,15 +77,17 @@ public class MainController {
 
                     // Если категория не пустая
                     if (!category.isEmpty()) {
-                        // Если категория равная мебели
-                        if (category.equals("furniture")) {
+                        // Если категория равная видеокартам
+                        if (category.equals("videocards")) {
                             model.addAttribute("search_product", productRepository.findByTitleAndCategoryOrderByPriceDesc(search.toLowerCase(), Float.parseFloat(ot), Float.parseFloat(Do), 1));
-                            // Если категория равная бытовой техники
-                        } else if (category.equals("appliances")) {
+                            // Если категория равная процессорам
+                        } else if (category.equals("processors")) {
                             model.addAttribute("search_product", productRepository.findByTitleAndCategoryOrderByPriceDesc(search.toLowerCase(), Float.parseFloat(ot), Float.parseFloat(Do), 2));
                             // Если категория равная одежде
-                        } else if (category.equals("clothes")) {
+                        } else if (category.equals("motherboards")) {
                             model.addAttribute("search_product", productRepository.findByTitleAndCategoryOrderByPriceDesc(search.toLowerCase(), Float.parseFloat(ot), Float.parseFloat(Do), 3));
+                        } else if (category.equals("memory")) {
+                            model.addAttribute("search_product", productRepository.findByTitleAndCategoryOrderByPriceDesc(search.toLowerCase(), Float.parseFloat(ot), Float.parseFloat(Do), 4));
                         }
                         // Если категория не выбрана
                     }
