@@ -164,23 +164,34 @@
                     </fieldset>
                 </form>
                 </div>
-            <h3>Результат: </h3>
-            <div th:each="product : ${search_product}">
-                <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
-                <br>
-                <br>
-                <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
-                <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-            </div>
-
-            <h3>Доступные товары: </h3>
-            <div class="product_item col-md-3" style="border:1px solid gray; border-radius: 5px; background-color: #eceeec; margin: 20px 20px 20px 20px; padding: 5px;" th:each="product : ${products}">
+            <!--product_item col-md-3-->
+            <h3 class="allproduct">Доступные товары: </h3>
+                <div class=" product_item col-md-3" style="border:1px solid gray; border-radius: 5px; background-color: #eceeec; margin: 20px 20px 20px 20px; padding: 5px;" th:each="product : ${products}">
                 <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
                 <br>
                 <br>
                 <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}" id="title"></a>
                 <p th:text="'Цена: ' + ${product.getPrice()}"></p>
             </div>
+<!--                </div>-->
+
+            <h3 class="resultproduct"></h3>
+            <div th:each="product : ${search_product}">
+                <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+                <br>
+                <br>
+                <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+                <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+                <script>
+                    document.querySelector(".allproduct").outerHTML ="";
+                    document.querySelector(".resultproduct").innerHTML ="Результат поиска:";
+                </script>
+
+            </div>
+
+
+
+
         </div>
     </div>
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">

@@ -21,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -227,15 +229,20 @@ public class AdminController {
 
     @PostMapping("/test_order")
     public String testResult (@RequestParam("test") String test, Model model){
-//        System.out.println(test);
+        System.out.println(test);
 //        model.addAttribute("test1", test);
 //        System.out.println("Вызов:" + model.getAttribute("test1"));
-//        System.out.println(model.addAttribute("test1", orderRepository.findByLastFourSign("c925")));
+//        System.out.println(orderRepository.findByLastFourSign(test));
 //        System.out.println(orderRepository.findByLastFourSign("c925"));
 //        System.out.println(model.addAttribute("test1", orderRepository.findByNumber(test)));
 //        System.out.println(model.addAttribute("test1", orderRepository.findByNumberContaining(test)));
 //        System.out.println(orderRepository.findAll());
-        List<Order> orderList = orderRepository.findByNumberContaining(test);
+
+
+        //Поиск по любым символам в номере заказа
+        //List<Order> orderList = orderRepository.findByNumberContaining(test);
+        //Поиск по последним символам в заказе
+        List<Order> orderList = orderRepository.findByLastFourSign(test);
         model.addAttribute("search_order", orderList);
 
         return "admin/test";

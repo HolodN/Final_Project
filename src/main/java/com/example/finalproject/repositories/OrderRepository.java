@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,8 +17,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     List<Order> findAllById(int id);
 
-    @Query(value="SELECT * FROM orders WHERE (lower(number) LIKE '%?1')", nativeQuery = true)
-    List<Order> findByLastFourSign (String sign);
+    @Query(value="SELECT * FROM orders WHERE number LIKE %:test", nativeQuery = true)
+    List<Order> findByLastFourSign (String test);
 
     List<Order> findByNumber(String sign);
 
@@ -24,4 +26,5 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
 
     List<Order> findAll();
+
 }

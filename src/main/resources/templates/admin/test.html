@@ -9,12 +9,12 @@
 <form th:method="POST" th:action="@{/admin/test_order}">
     <fieldset>
   <label for="test">Введите номер:</label>
-  <input type="text" th:value="*{test1}" placeholder="Введите номер" name="test" id="test">
-  <input type="submit" value="Отправить">
+  <input type="text" placeholder="Введите номер" name="test" id="test">
+  <input type="submit" value="Найти">
         </fieldset>
 </form>
 
-<h3>Все заказы:</h3>
+<h3 class="allorder">Все заказы:</h3>
 <div th:each="order : ${orders}">
     <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>
     <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="300px">
@@ -26,7 +26,7 @@
 
     <hr>
 </div>
-<h3>Результат поиска:</h3>
+<h3 class="resultorder"></h3>
 <div th:each="order : ${search_order}">
     <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>
     <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="300px">
@@ -35,7 +35,10 @@
     <p th:text="'Цена: ' + ${order.getPrice()}"></p>
     <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
     <p th:text="'Статус: ' + ${order.getStatus()}"></p>
-
+    <script>
+        document.querySelector(".allorder").outerHTML ="";
+        document.querySelector(".resultorder").innerHTML ="Результат поиска: ";
+    </script>
     <hr>
 </div>
 
