@@ -1,4 +1,9 @@
 
+body {
+
+    color: #808080;
+}
+
 h3 {
     color: gray;
 }
@@ -19,6 +24,15 @@ h3 {
     padding: 2px;
     color: black;
 
+}
+
+.footer-icon {
+    filter: invert(42%) sepia(0%) saturate(0%) hue-rotate(125deg) brightness(94%) contrast(93%);
+}
+
+.header-icon {
+
+    filter: invert(42%) sepia(0%) saturate(0%) hue-rotate(125deg) brightness(94%) contrast(93%);
 }
 
 /*html {*/

@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.logging.Filter;
+
 // Основной конфиг для конфигурации безопасности в приложении
 @EnableWebSecurity
 // Cообщает что в приложении доступно разграничение ролей на основе аннотаций
@@ -45,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         // Указываем какой url запрос будет отправляться при заходе на закрытые страницы
 
-        // Отключаем защиту от межсайтовой подделки запросов
+        // Отключаем защиту от межсайтовой подделки запросов .csrf().disable()
         http
                 // Указываем что все страницы должны быть защищены аутентификации
                 .authorizeRequests()
@@ -53,8 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/admin").hasAnyRole("ADMIN")
 //                .antMatchers("/user").hasAnyRole("USER")
                 // Указываем что не аутентифицированные пользователи могут заходить на страницу с формой аутентификации и на объект ошибки
-                // С помощью permitAll указывакем что данные страницы по умолчанию доступны всем пользователям
-                .antMatchers("/auth/login", "/error", "/auth/registration", "/product", "/product/info/{id}", "/img/**", "/product/search").permitAll()
+                // С помощью permitAll указываем что данные страницы по умолчанию доступны всем пользователям
+                .antMatchers("/auth/login", "/error", "/auth/registration", "/product", "/product/info/{id}", "/img/**", "/product/search", "/process_login").permitAll()
                 // Указываем что все остальные страницы доступны пользователю с ролью user и admin
                 .anyRequest().hasAnyRole("USER", "ADMIN")
 //                // Указываем что для всех остальных страниц необходимо вызывать метод authenticated, который открываем форму аутентификации
@@ -86,8 +88,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure (WebSecurity web){
 
         web.ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**", "/icon/**", "/assets/**");
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**", "/icon/**", "/assets/**", "/product/**");
     }
+
 
 
 }
