@@ -6,9 +6,9 @@ import com.example.finalproject.models.Product;
 import com.example.finalproject.repositories.CategoryRepository;
 import com.example.finalproject.repositories.OrderRepository;
 import com.example.finalproject.security.PersonDetails;
+import com.example.finalproject.services.OrderService;
 import com.example.finalproject.services.ProductService;
 import com.example.finalproject.util.ProductValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,8 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,11 +39,14 @@ public class AdminController {
 
     private final OrderRepository orderRepository;
 
-    public AdminController(ProductValidator productValidator, ProductService productService, CategoryRepository categoryRepository, OrderRepository orderRepository) {
+    private final OrderService orderService;
+
+    public AdminController(ProductValidator productValidator, ProductService productService, CategoryRepository categoryRepository, OrderRepository orderRepository, OrderService orderService) {
         this.productValidator = productValidator;
         this.productService = productService;
         this.categoryRepository = categoryRepository;
         this.orderRepository = orderRepository;
+        this.orderService = orderService;
     }
 
 //    @PreAuthorize("hasRole('ROLE_ADMIN') and hasRole('')")
@@ -220,8 +221,9 @@ public class AdminController {
     @GetMapping("/test")
     public String test(Model model){
 
-        List<Order> orderList = orderRepository.findAll();
-        model.addAttribute("orders", orderList);
+//        List<Order> orderList = orderRepository.findAll();
+//        model.addAttribute("orders", orderList);
+          model.addAttribute("orders", orderService.getAllOrders());
 
 
         return "admin/test";
