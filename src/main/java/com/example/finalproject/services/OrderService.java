@@ -1,9 +1,11 @@
 package com.example.finalproject.services;
 
 
+import com.example.finalproject.enumm.Status;
 import com.example.finalproject.models.Order;
 import com.example.finalproject.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,4 +27,5 @@ public class OrderService {
     public List<Order> getOrderByLastFourSign(String number){
         return orderRepository.findByLastFourSign(number);
     }
+
 }

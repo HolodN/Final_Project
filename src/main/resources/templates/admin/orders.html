@@ -33,7 +33,7 @@
     <div class="container bg-light" style="height:auto;">
 
 <h3>Поиск заказа</h3>
-<form th:method="POST" th:action="@{/admin/test_order}">
+<form th:method="POST" th:action="@{/admin/order_search}">
     <fieldset>
   <label for="test">Введите номер:</label>
   <input type="text" placeholder="Введите номер" name="test" id="test">
@@ -51,6 +51,8 @@
     <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
     <p th:text="'Статус: ' + ${order.getStatus()}"></p>
     <p th:text="'ID: ' + ${order.getId()}"></p>
+    <a th:href="@{/admin/order/status/{id}(id=${order.getId()})}">Отменить заказ</a>
+
 
     <hr>
 </div>
@@ -64,6 +66,8 @@
     <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
     <p th:text="'Статус: ' + ${order.getStatus()}"></p>
     <p th:text="'ID: ' + ${order.getId()}"></p>
+    <a th:href="@{/admin/order/status/{id}(id=${order.getId()})}">Отменить заказ</a>
+
 
     <script>
         document.querySelector(".allorder").outerHTML ="";

@@ -229,17 +229,9 @@ public class AdminController {
         return "admin/orders";
     }
 
-    @PostMapping("/test_order")
+    @PostMapping("/order_search")
     public String testResult (@RequestParam("test") String test, Model model){
         System.out.println(test);
-//        model.addAttribute("test1", test);
-//        System.out.println("Вызов:" + model.getAttribute("test1"));
-//        System.out.println(orderRepository.findByLastFourSign(test));
-//        System.out.println(orderRepository.findByLastFourSign("c925"));
-//        System.out.println(model.addAttribute("test1", orderRepository.findByNumber(test)));
-//        System.out.println(model.addAttribute("test1", orderRepository.findByNumberContaining(test)));
-//        System.out.println(orderRepository.findAll());
-
 
         //Поиск по любым символам в номере заказа
         //List<Order> orderList = orderRepository.findByNumberContaining(test);
@@ -250,4 +242,12 @@ public class AdminController {
 
         return "admin/orders";
     }
+    @GetMapping("/order/status/{id}")
+    public String changeOrderStatus (@PathVariable("id") int id){
+
+        System.out.println("Получен ID: " + id);
+        orderRepository.changeOrderStatus(id);
+
+    return "redirect:/admin";
+    };
 }
