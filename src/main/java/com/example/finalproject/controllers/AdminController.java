@@ -218,7 +218,7 @@ public class AdminController {
         productService.updateProduct(id, product);
         return "redirect:/admin";
     }
-    @GetMapping("/test")
+    @GetMapping("/orders")
     public String test(Model model){
 
 //        List<Order> orderList = orderRepository.findAll();
@@ -226,7 +226,7 @@ public class AdminController {
           model.addAttribute("orders", orderService.getAllOrders());
 
 
-        return "admin/test";
+        return "admin/orders";
     }
 
     @PostMapping("/test_order")
@@ -248,6 +248,6 @@ public class AdminController {
 //        model.addAttribute("search_order", orderList);
           model.addAttribute("search_order", orderService.getOrderByLastFourSign(test));
 
-        return "admin/test";
+        return "admin/orders";
     }
 }
