@@ -244,8 +244,9 @@ public class AdminController {
         //Поиск по любым символам в номере заказа
         //List<Order> orderList = orderRepository.findByNumberContaining(test);
         //Поиск по последним символам в заказе
-        List<Order> orderList = orderRepository.findByLastFourSign(test);
-        model.addAttribute("search_order", orderList);
+//        List<Order> orderList = orderRepository.findByLastFourSign(test);
+//        model.addAttribute("search_order", orderList);
+          model.addAttribute("search_order", orderService.getOrderByLastFourSign(test));
 
         return "admin/test";
     }
