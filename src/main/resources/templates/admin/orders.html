@@ -101,8 +101,18 @@
     <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
     <p th:text="'Статус: ' + ${order.getStatus()}"></p>
     <p th:text="'ID: ' + ${order.getId()}"></p>
-    <a th:href="@{/admin/order/status/{id}(id=${order.getId()})}">Отменить заказ</a>
+<!--    <a th:href="@{/admin/order/status/{id}(id=${order.getId()})}">Отменить заказ</a>-->
 
+    <form th:action="@{/admin/order/newstatus/{id}(id=${order.getId()})}">
+        <select id="status" name="status">
+            <option th:value = "0">Принят</option>
+            <option th:value = "1">Оформлен</option>
+            <option th:value = "2">Ожидает</option>
+            <option th:value = "3">Получен</option>
+            <option th:value = "4">Отменен</option>
+        </select>
+        <input type = "submit" value = "Установить">
+    </form>
 
     <script>
 

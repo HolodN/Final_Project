@@ -250,4 +250,14 @@ public class AdminController {
 
     return "redirect:/admin";
     };
+
+    @GetMapping("/order/newstatus/{id}")
+    public String changeNewStatus (@PathVariable("id") int id, @RequestParam(value = "status") int status){
+        System.out.println(id);
+        System.out.println(status);
+        if (status == 4){
+            orderRepository.changeOrderStatus(id);
+        }
+        return "redirect:/admin/orders";
+    };
 }
