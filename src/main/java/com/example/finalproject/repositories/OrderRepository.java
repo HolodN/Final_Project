@@ -30,8 +30,20 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query(value = "SELECT * FROM orders WHERE id = ?1", nativeQuery = true)
     List<Order> findOrderById (int id);
 
-
+//    Принят, Оформлен, Ожидает, Получен, Отменен
+    @Modifying
+    @Query(value = "UPDATE orders set status=0 WHERE id = ?1", nativeQuery = true)
+    void changeOrderStatusAccepted (int id);
+    @Modifying
+    @Query(value = "UPDATE orders set status=1 WHERE id = ?1", nativeQuery = true)
+    void changeOrderStatusIssued (int id);
+    @Modifying
+    @Query(value = "UPDATE orders set status=2 WHERE id = ?1", nativeQuery = true)
+    void changeOrderStatusWaiting (int id);
+    @Modifying
+    @Query(value = "UPDATE orders set status=3 WHERE id = ?1", nativeQuery = true)
+    void changeOrderStatusReceived (int id);
     @Modifying
     @Query(value = "UPDATE orders set status=4 WHERE id = ?1", nativeQuery = true)
-    void changeOrderStatus (int id);
+    void changeOrderStatusCancelled (int id);
 }

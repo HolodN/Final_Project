@@ -246,7 +246,6 @@ public class AdminController {
     public String changeOrderStatus (@PathVariable("id") int id){
 
         System.out.println("Получен ID: " + id);
-        orderRepository.changeOrderStatus(id);
 
     return "redirect:/admin";
     };
@@ -255,9 +254,22 @@ public class AdminController {
     public String changeNewStatus (@PathVariable("id") int id, @RequestParam(value = "status") int status){
         System.out.println(id);
         System.out.println(status);
-        if (status == 4){
-            orderRepository.changeOrderStatus(id);
-        }
+        if (status == 0){
+            orderRepository.changeOrderStatusAccepted(id);
+            }
+            else if (status == 1) {
+                orderRepository.changeOrderStatusIssued(id);
+            }
+                else if (status == 2) {
+                    orderRepository.changeOrderStatusWaiting(id);
+                }
+                    else if (status == 3) {
+                        orderRepository.changeOrderStatusReceived(id);
+                    }
+                        else {
+                            orderRepository.changeOrderStatusCancelled(id);
+                        }
+
         return "redirect:/admin/orders";
     };
 }

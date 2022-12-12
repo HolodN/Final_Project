@@ -104,6 +104,7 @@
 <!--    <a th:href="@{/admin/order/status/{id}(id=${order.getId()})}">Отменить заказ</a>-->
 
     <form th:action="@{/admin/order/newstatus/{id}(id=${order.getId()})}">
+        <h6>Изменить статус на:</h6>
         <select id="status" name="status">
             <option th:value = "0">Принят</option>
             <option th:value = "1">Оформлен</option>
@@ -111,6 +112,7 @@
             <option th:value = "3">Получен</option>
             <option th:value = "4">Отменен</option>
         </select>
+
         <input type = "submit" value = "Установить">
     </form>
 
@@ -127,8 +129,8 @@
 </div>
 
         <footer>
-            <div class="row">
-                <!--                <div class="col-1"></div>-->
+            <div class="row ">
+<!--                <div class="col-1"></div>-->
                 <div class="col-12">
                     <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
                         <!--      <footer class="fixed-bottom d-flex flex-wrap justify-content-around align-items-center py-3 my-4 border-top">-->
@@ -147,8 +149,7 @@
                         </ul>
                     </div>
                 </div>
-
-                <!--                <div class="col-1"></div>-->
+<!--                <div class="col-1"></div>-->
             </div>
         </footer>
     </div>
