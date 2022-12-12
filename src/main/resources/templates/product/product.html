@@ -83,7 +83,7 @@
             <!--product_item col-md-3-->
             <h3 class="allproduct">Доступные товары: </h3>
             <div class=" product_item col-md-3" style="border:1px solid gray; border-radius: 5px; background-color: #eceeec; margin: 20px 20px 20px 20px; padding: 5px;" th:each="product : ${products}">
-                <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+                <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="150px">
                 <br>
                 <br>
                 <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}" id="title"></a>
@@ -91,8 +91,8 @@
             </div>
 
             <h3 class="resultproduct"></h3>
-            <div th:each="product : ${search_product}">
-                <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="100%">
+            <div th:each="product : ${search_product}" >
+                <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="10%">
                 <br>
                 <br>
                 <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
