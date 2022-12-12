@@ -1,12 +1,13 @@
 package com.example.finalproject.controllers;
 
 import com.example.finalproject.models.Image;
-import com.example.finalproject.models.Order;
+import com.example.finalproject.models.Person;
 import com.example.finalproject.models.Product;
 import com.example.finalproject.repositories.CategoryRepository;
 import com.example.finalproject.repositories.OrderRepository;
 import com.example.finalproject.security.PersonDetails;
 import com.example.finalproject.services.OrderService;
+import com.example.finalproject.services.PersonService;
 import com.example.finalproject.services.ProductService;
 import com.example.finalproject.util.ProductValidator;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -41,12 +41,15 @@ public class AdminController {
 
     private final OrderService orderService;
 
-    public AdminController(ProductValidator productValidator, ProductService productService, CategoryRepository categoryRepository, OrderRepository orderRepository, OrderService orderService) {
+    private final PersonService personService;
+
+    public AdminController(ProductValidator productValidator, ProductService productService, CategoryRepository categoryRepository, OrderRepository orderRepository, OrderService orderService, PersonService personService) {
         this.productValidator = productValidator;
         this.productService = productService;
         this.categoryRepository = categoryRepository;
         this.orderRepository = orderRepository;
         this.orderService = orderService;
+        this.personService = personService;
     }
 
 //    @PreAuthorize("hasRole('ROLE_ADMIN') and hasRole('')")
@@ -218,6 +221,8 @@ public class AdminController {
         productService.updateProduct(id, product);
         return "redirect:/admin";
     }
+
+//   Метод возвращает список заказов
     @GetMapping("/orders")
     public String test(Model model){
 
@@ -228,7 +233,7 @@ public class AdminController {
 
         return "admin/orders";
     }
-
+//  Метод по поиску заказов
     @PostMapping("/order_search")
     public String testResult (@RequestParam("test") String test, Model model){
         System.out.println(test);
@@ -249,9 +254,9 @@ public class AdminController {
 
     return "redirect:/admin";
     };
-
+//    Метод по изменению статуса заказа
     @GetMapping("/order/newstatus/{id}")
-    public String changeNewStatus (@PathVariable("id") int id, @RequestParam(value = "status") int status){
+    public String changeNewOrderStatus (@PathVariable("id") int id, @RequestParam(value = "status") int status){
         System.out.println(id);
         System.out.println(status);
         if (status == 0){
@@ -271,5 +276,24 @@ public class AdminController {
                         }
 
         return "redirect:/admin/orders";
-    };
+    }
+
+    @GetMapping("/users")
+    public String Users (Model model){
+
+        model.addAttribute("users", personService.getAllUsers());
+
+        return "admin/users";
+    }
+
+    @GetMapping("/users/role/{id}")
+    public String changeNewUserStatus (@PathVariable("id") int id){
+        System.out.println("Получен ID пользователеля: " + id);
+        Person personRole = personService.getPersonId(id);
+        personService.updateRole(personRole);
+
+        return "redirect:/admin/users";
+    }
+
+
 }
