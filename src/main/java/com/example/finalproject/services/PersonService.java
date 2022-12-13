@@ -50,8 +50,33 @@ public class PersonService {
     }
 
     @Transactional
-    public void updateRole(Person person){
-        person.setRole("ROLE_ADMIN");
+    public void updateRoleUser(Person person){
+        person.setRole("ROLE_SUPER");
         personRepository.save(person);
     }
+
+    @Transactional
+    public void updateRoleAdmin(Person person){
+        person.setRole("ROLE_USER");
+        personRepository.save(person);
+    }
+
+    @Transactional
+    public void updateRoleSuperDown(Person person){
+        person.setRole("ROLE_USER");
+        personRepository.save(person);
+    }
+
+    @Transactional
+    public void updateRoleSuperUp(Person person){
+        person.setRole("ROLE_POWER");
+        personRepository.save(person);
+    }
+
+    @Transactional
+    public void updateRolePowerDown(Person person){
+        person.setRole("ROLE_SUPER");
+        personRepository.save(person);
+    }
+
 }

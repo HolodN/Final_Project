@@ -11,9 +11,9 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container bg-light" style="height:auto;">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <a href="/product" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
             <img class = "header-icon" src="/assets/img/cpu-fill.png" alt="Bootstrap" width="40" height="32"><span style = "font-weight: bold; padding-left: 5px;">MyStore</span>
         </a>
 
@@ -31,14 +31,9 @@
         </div>
     </header>
 
-    <div class="container bg-light" style="height:auto;">
-
-
-
-    <div style="width:100%" >
 
         <div class="row">
-            <div style="width:80%; border:1px solid gray; border-radius: 5px; background-color: #eceeec; margin: 20px 20px 20px 20px; padding: 5px;" >
+            <div style="width:100%; padding: 10px; border:1px solid gray; border-radius: 5px; background-color: #eceeec;" >
                 <form th:method="POST" th:action="@{/product/search}">
                     <fieldset>
                         <legend>Выберите параметры для сортировки, поиска, фильтрации</legend>
@@ -81,30 +76,30 @@
                 </form>
                 </div>
             <!--product_item col-md-3-->
-            <h3 class="allproduct">Доступные товары: </h3>
-            <div class=" product_item col-md-3" style="border:1px solid gray; border-radius: 5px; background-color: #eceeec; margin: 20px 20px 20px 20px; padding: 5px;" th:each="product : ${products}">
-                <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="150px">
-                <br>
-                <br>
-                <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}" id="title"></a>
-                <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-            </div>
+            <div class="row justify-content-evenly">
+                <h3 class="allproduct">Доступные товары: </h3>
+                    <div class=" product_item col-md-3" style="border:1px solid gray; border-radius: 5px; background-color: #eceeec; margin: 20px 20px 20px 20px; padding: 5px;" th:each="product : ${products}">
+                        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
+                        <br>
+                        <br>
+                        <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}" id="title"></a>
+                        <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+                    </div>
 
-            <h3 class="resultproduct"></h3>
-            <div th:each="product : ${search_product}" >
-                <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="10%">
-                <br>
-                <br>
-                <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
-                <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-                <script>
-                    document.querySelector(".allproduct").outerHTML ="";
-                    document.querySelector(".resultproduct").innerHTML ="Результат поиска:";
-                </script>
+                    <h3 class="resultproduct"></h3>
+                    <div th:each="product : ${search_product}" >
+                        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="10%">
+                        <br>
+                        <br>
+                        <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+                        <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+                        <script>
+                            document.querySelector(".allproduct").outerHTML ="";
+                            document.querySelector(".resultproduct").innerHTML ="Результат поиска:";
+                        </script>
 
+                    </div>
             </div>
-        </div>
-    </div>
         <footer>
             <div class="row">
 <!--                <div class="col-1"></div>-->

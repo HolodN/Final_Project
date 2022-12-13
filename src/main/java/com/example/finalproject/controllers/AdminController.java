@@ -286,14 +286,51 @@ public class AdminController {
         return "admin/users";
     }
 
-    @GetMapping("/users/role/{id}")
+    @GetMapping("/users/role_user_up/{id}")
     public String changeNewUserStatus (@PathVariable("id") int id){
         System.out.println("Получен ID пользователеля: " + id);
         Person personRole = personService.getPersonId(id);
-        personService.updateRole(personRole);
+        personService.updateRoleUser(personRole);
 
         return "redirect:/admin/users";
     }
+
+    @GetMapping("/users/role_admin_down/{id}")
+    public String changeNewAdminStatus (@PathVariable("id") int id){
+        System.out.println("Получен ID пользователеля: " + id);
+        Person personRole = personService.getPersonId(id);
+        personService.updateRoleAdmin(personRole);
+
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/users/role_super_down/{id}")
+    public String changeNewSuperStatusDown (@PathVariable("id") int id){
+        System.out.println("Получен ID пользователеля: " + id);
+        Person personRole = personService.getPersonId(id);
+        personService.updateRoleSuperDown(personRole);
+
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/users/role_super_up/{id}")
+    public String changeNewSuperStatusUp (@PathVariable("id") int id){
+        System.out.println("Получен ID пользователеля: " + id);
+        Person personRole = personService.getPersonId(id);
+        personService.updateRoleSuperUp(personRole);
+
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/users/role_power_down/{id}")
+    public String changeNewPowerStatusDown (@PathVariable("id") int id){
+        System.out.println("Получен ID пользователеля: " + id);
+        Person personRole = personService.getPersonId(id);
+        personService.updateRolePowerDown(personRole);
+
+        return "redirect:/admin/users";
+    }
+
 
 
 }
