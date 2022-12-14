@@ -19,7 +19,7 @@
 
                     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                         <li><a href="/index" class="nav-link px-2 link-secondary">Главная</a></li>
-                        <li><a href="/product" class="nav-link px-2 link-dark">Товары</a></li>
+<!--                        <li><a href="/product" class="nav-link px-2 link-dark">Товары</a></li>-->
                         <li><a href="/orders" class="nav-link px-2 link-dark">Заказы</a></li>
                         <li><a href="/cart" class="nav-link px-2 link-dark">Корзина</a></li>
                         <li><a href="/index" class="nav-link px-2 link-dark">Кабинет</a></li>
@@ -96,7 +96,7 @@
                             <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
                             <br>
                             <br>
-                            <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}" id="title"></a>
+                            <a th:href="@{/user/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}" id="title"></a>
                             <p th:text="'Цена: ' + ${product.getPrice()}"></p>
                             <a th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину</a>
                         </div>
