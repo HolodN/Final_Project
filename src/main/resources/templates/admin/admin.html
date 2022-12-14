@@ -48,7 +48,7 @@
             <h3>Каталог товаров: </h3>
             <hr>
             <div class="row justify-content-evenly">
-            <div class ="product_item col-md-3" style="border:1px solid gray; border-radius: 5px; background-color: #eceeec; margin: 2px 2px 10px 2px; padding: 5px;" th:each="product : ${products}">
+            <div class ="product_item_admin col-md-3" style="border:1px solid gray; border-radius: 5px; background-color: #eceeec; margin: 2px 2px 10px 2px; padding: 5px;" th:each="product : ${products}">
                 <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="100px">
                 <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
                 <p th:text="'Описание: ' + ${product.getDescription()}"></p>

@@ -33,27 +33,34 @@
 
 
         <div class="row justify-content-center">
-            <div style="width: 95%; padding: 10px; border:1px solid gray; border-radius: 5px; background-color: #eceeec;" >
+            <div style="width: 87%; padding: 10px; border:1px solid gray; border-radius: 5px; background-color: #eceeec;" >
                 <form th:method="POST" th:action="@{/product/search}">
                     <fieldset>
+                        <div class="row">
+                        <div class="col">
                         <legend>Выберите параметры для сортировки, поиска, фильтрации</legend>
                         <br>
                         <label for="search">Поиск по наименованию</label>
+                        <br>
                         <input type="search" name="search"  th:value="*{value_search}" id="search">
                         <br>
-                        <p>Цена, ₽</p>
+                        <p style="margin-top:10px;">Цена, ₽</p>
                         <label for="ot">От</label>
                         <input type="text" name="ot"  th:value="*{value_price_ot}" id="ot">
+                        <br>
                         <label for="do">До</label>
-                        <input type="text" name="do"  th:value="*{value_price_do}" id="do">
-                        <br>
-                        <br>
+                        <input style="margin-top:10px;" type="text" name="do"  th:value="*{value_price_do}" id="do">
+                        </div>
+                        <div class="col">
                         <input type="radio" id="ascending_price" name="price" value="sorted_by_ascending_price">
                         <label for="ascending_price">Отсортировать по возрастанию цены</label>
                         <br>
                         <br>
                         <input type="radio" id="descending_price" name="price" value="sorted_by_descending_price">
                         <label for="descending_price">Отсортировать по убыванию цены</label>
+                        </div>
+
+                        <div class="col">
                         <p>Категория товаров: </p>
                         <input type="radio" id="videocards" name="category" value="videocards">
                         <label for="videocards">Видеокарты</label>
@@ -71,13 +78,15 @@
                         <label for="memory">Оперативная память</label>
                         <br>
                         <br>
-                        <input type="submit" value="Найти">
+                        </div>
+                        </div>
+                        <input style="width:70px; margin-top: 10px;" type="submit" value="Найти">
                     </fieldset>
                 </form>
                 </div>
             <!--product_item col-md-3-->
             <div class="row justify-content-evenly">
-                <h3 class="allproduct">Доступные товары: </h3>
+                <h3 class="allproduct" style="margin-left:100px; margin-top:10px;">Доступные товары: </h3>
                     <div class=" product_item col-md-3" style="border:1px solid gray; border-radius: 5px; background-color: #eceeec; margin: 20px 20px 20px 20px; padding: 5px;" th:each="product : ${products}">
                         <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
                         <br>
@@ -86,18 +95,20 @@
                         <p th:text="'Цена: ' + ${product.getPrice()}"></p>
                     </div>
 
-                    <h3 class="resultproduct"></h3>
-                    <div th:each="product : ${search_product}" >
-                        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="10%">
-                        <br>
-                        <br>
-                        <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
-                        <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-                        <script>
-                            document.querySelector(".allproduct").outerHTML ="";
-                            document.querySelector(".resultproduct").innerHTML ="Результат поиска:";
-                        </script>
+                    <div class="row justify-content-evenly">
+                    <h3 class="resultproduct" style="margin-left:100px; margin-top:10px;"></h3>
+                        <div class=" product_item col-md-3" style="border:1px solid gray; border-radius: 5px; background-color: #eceeec; margin: 20px 20px 20px 20px; padding: 5px;" th:each="product : ${search_product}" >
+                            <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="60%">
+                            <br>
+                            <br>
+                            <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+                            <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+                            <script>
+                                document.querySelector(".allproduct").outerHTML ="";
+                                document.querySelector(".resultproduct").innerHTML ="Результат поиска:";
+                            </script>
 
+                        </div>
                     </div>
             </div>
         <footer>

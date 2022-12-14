@@ -8,7 +8,6 @@ h3 {
     color: gray;
 }
 
-
 .product_item {
     box-shadow: 1px 2px 5px 0px  black;
 }
@@ -17,6 +16,23 @@ h3 {
 }
 
 .product_item a {
+    text-decoration: none;
+    /*background-color: lightgray;*/
+    /*border-radius: 2px;*/
+    /*border: 1px solid gray;*/
+    padding: 2px;
+    color: gray;
+
+}
+
+.product_item_admin {
+    box-shadow: 1px 2px 5px 0px  black;
+}
+.product_item_admin:hover {
+    box-shadow: 6px 7px 20px 0px  black;
+}
+
+.product_item_admin a {
     text-decoration: none;
     background-color: lightgray;
     border-radius: 2px;

@@ -33,7 +33,7 @@
     </header>
 
     <div class="container bg-light" style="height:100vh;">
-        <h3>">Добавление товара</h3>
+        <h3>Добавление товара</h3>
         <form style="margin-top: 10px;" th:method="POST" th:action="@{/admin/product/add}" th:object="${product}" enctype="multipart/form-data">
             <label for="title">Введите наименование: </label>
             <input type="text" th:field="*{title}" placeholder="Наименование" id="title">

@@ -35,7 +35,7 @@
 
                         <div class="row justify-content-between">
                             <div class = "col" style="text-align: left">
-                            <h3>Личный кабинет пользователя</h3></div>
+                            <h3 style="margin-left:50px">Личный кабинет пользователя</h3></div>
                                 <!--<a href="/logout">Выйти из личного кабинета</a>-->
                             <div class = "col text-right" style="text-align: right">
                                 <form method="post" th:action="@{/logout}">
@@ -51,46 +51,61 @@
                         </div>
                     </div>
 
-                    <div style="width:100%; padding: 10px; border:1px solid gray; border-radius: 5px; background-color: #eceeec;" >
+                <div class="row justify-content-center">
+                    <div style="width:88%; padding: 10px; border:1px solid gray; border-radius: 5px; background-color: #eceeec;" >
                         <form th:method="POST" th:action="@{/product/search}">
                             <fieldset>
-                                <legend>Выберите параметры для сортировки, поиска, фильтрации</legend>
-                                <br>
-                                <label for="search">Поиск по наименованию</label>
-                                <input type="search" id="search">
-                                <br>
-                                <p>Цена, ₽</p>
-                                <label for="ot">От</label>
-                                <input type="text" name="ot" id="ot">
-                                <label for="do">До</label>
-                                <input type="text" name="do" id="do">
-                                <br>
-                                <br>
-                                <input type="radio" id="ascending_price" name="price">
-                                <label for="ascending_price">Отсортировать по возрастанию цены</label>
-                                <br>
-                                <br>
-                                <input type="radio" id="descending_price" name="price">
-                                <label for="descending_price">Отсортировать по убыванию цены</label>
-                                <p>Категория товаров: </p>
-                                <input type="radio" id="furniture" name="category" value="furniture">
-                                <label for="furniture">Мебель</label>
-                                <br>
-                                <br>
-                                <input type="radio" id="appliances" name="category" value="appliances">
-                                <label for=appliances>Бытовая техника</label>
-                                <br>
-                                <br>
-                                <input type="radio" id="clothes" name="category" value="clothes">
-                                <label for="clothes">Одежка</label>
-                                <br>
-                                <br>
-                                <input type="submit" value="Найти">
+                                <div class="row">
+                                    <div class="col">
+                                        <legend>Выберите параметры для сортировки, поиска, фильтрации</legend>
+                                        <br>
+                                        <label for="search">Поиск по наименованию</label>
+                                        <br>
+                                        <input type="search" name="search"  th:value="*{value_search}" id="search">
+                                        <br>
+                                        <p style="margin-top:10px;">Цена, ₽</p>
+                                        <label for="ot">От</label>
+                                        <input type="text" name="ot"  th:value="*{value_price_ot}" id="ot">
+                                        <br>
+                                        <label for="do">До</label>
+                                        <input style="margin-top:10px;" type="text" name="do"  th:value="*{value_price_do}" id="do">
+                                    </div>
+                                    <div class="col">
+                                        <input type="radio" id="ascending_price" name="price" value="sorted_by_ascending_price">
+                                        <label for="ascending_price">Отсортировать по возрастанию цены</label>
+                                        <br>
+                                        <br>
+                                        <input type="radio" id="descending_price" name="price" value="sorted_by_descending_price">
+                                        <label for="descending_price">Отсортировать по убыванию цены</label>
+                                    </div>
+
+                                    <div class="col">
+                                        <p>Категория товаров: </p>
+                                        <input type="radio" id="videocards" name="category" value="videocards">
+                                        <label for="videocards">Видеокарты</label>
+                                        <br>
+                                        <br>
+                                        <input type="radio" id="processors" name="category" value="processors">
+                                        <label for="processors">Процессоры</label>
+                                        <br>
+                                        <br>
+                                        <input type="radio" id="motherboards" name="category" value="motherboards">
+                                        <label for="motherboards">Материнские платы</label>
+                                        <br>
+                                        <br>
+                                        <input type="radio" id="memory" name="category" value="memory">
+                                        <label for="memory">Оперативная память</label>
+                                        <br>
+                                        <br>
+                                    </div>
+                                </div>
+                                <input style="width:70px; margin-top: 10px;" type="submit" value="Найти">
                             </fieldset>
                         </form>
                     </div>
+                    </div>
 
-                <h3>Доступные товары: </h3>
+                <h3 style="margin-left:60px">Доступные товары: </h3>
                 <div class="row justify-content-evenly">
                         <div class=" product_item col-md-3" style="border:1px solid gray; border-radius: 5px; background-color: #eceeec; margin: 20px 20px 20px 20px; padding: 5px;" th:each="product : ${products}">
                             <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
@@ -98,7 +113,7 @@
                             <br>
                             <a th:href="@{/user/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}" id="title"></a>
                             <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-                            <a th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину</a>
+                            <a style="background: lightgrey; border: 1px solid black; border-radius:2px;" th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину</a>
                         </div>
                 </div>
 
